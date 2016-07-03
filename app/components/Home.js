@@ -1,40 +1,35 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
+var PropTypes = React.PropTypes;
 
-var Home = React.createClass({
-  getInitialState: function() {
-    return {
-      areaSearch: ''
-    }
-  },
-  onAreaSearch: function(e) {
-    this.setState({
-      areaSearch: e.target.value
-    })
-  },
-  render: function() {
-    return (
-      <div>
-        <div>Hello from home!</div>
-        <Link to='/climbs/new'>
-          <button type='button'>Add Climb</button>
-        </Link>
-        <Link to='/climbs/edit'>
-          <button type='button'>Edit Climb</button>
-        </Link>
-        <form>
-          <input
-            placeholder = "Search"
-            value={this.state.areaSearch}
-            onChange={this.onAreaSearch}
-          />
-        </form>
+function Home(props) {
+  return (
+    <div>
+      <div>Hello from home!</div>
+        <button type='button' onClick={props.onButtonClick}>Add Climb</button>
+      <Link to='/climbs/edit'>
+        <button type='button'>Edit Climb</button>
+      </Link>
+      <p>{props.areaSearch}</p>
+      <form>
+        <input
+          placeholder = "Search"
+          value={props.areaSearch}
+          onChange={props.onAreaSearch}
+        />
+      </form>
+    </div>
+  )
+}
 
-      </div>
-    )
-  }
-});
+Home.propTypes = {
+  areaSearch: PropTypes.string.isRequired,
+  onAreaSearch: PropTypes.func.isRequired,
+  onButtonClick: PropTypes.func.isRequired
+}
+
+
 
 
 module.exports = Home;
